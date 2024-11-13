@@ -14,6 +14,7 @@ public class MoveOverPlatform : MonoBehaviour
     private bool isMovingVertical = false;
     private bool isMovingHorizontal = false;
     
+    public GameObject canvaDead = null;
 
     void Start()
     {
@@ -37,8 +38,11 @@ public class MoveOverPlatform : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collition){
-        if (collition.gameObject.CompareTag("Pecheur") || collition.gameObject.CompareTag("Sol")){
+        if (collition.gameObject.CompareTag("Sol")){
             Physics2D.IgnoreCollision(collition.collider, GetComponent<Collider2D>());
+        }
+        if (collition.gameObject.CompareTag("Pecheur")){
+            canvaDead.SetActive(true);  
         }
     }
 

@@ -10,6 +10,7 @@ public class MovePerso : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private SpriteRenderer spriteRenderer = null;
+    public bool isDead = false;
 
     void Start()
     {
@@ -20,7 +21,18 @@ public class MovePerso : MonoBehaviour
 
     void Update()
     {
-        // Déplacement horizontal
+        if (!isDead)
+        {
+            MouvPerso();
+        }
+    }
+
+    public void setDead(bool dead){
+        isDead = dead;
+    }
+
+    void MouvPerso(){
+                // Déplacement horizontal
         float horizontal = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if (horizontal < 0){

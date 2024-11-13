@@ -6,6 +6,7 @@ public class ScriptDead : MonoBehaviour
 {
 
     public GameObject canvaDead = null;
+
     void Start()
     {
         
@@ -21,7 +22,8 @@ public class ScriptDead : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Pecheur") && canvaDead != null)
         {
-           canvaDead.SetActive(true);        
+            Debug.Log("Appel du canva:");
+            canvaDead.SetActive(true);        
         }
     }
 }
