@@ -7,15 +7,14 @@ public class ScriptMoveOnPecheur : MonoBehaviour
     public float horizontalSpeed = 6f;
     public float hauteur = 2f;
     public bool mouvIsFinish = true;
+    private Collider2D sol = null;
     private bool isTop = false;
     public bool isMovingVertical = false;
     public bool isMovingHorizontal = false;
     private Rigidbody2D rb;
-    private Collider2D col;
     private int numbTouchGroun = 0;
     void Start(){
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
     }
     void Update()
     {
@@ -29,7 +28,6 @@ public class ScriptMoveOnPecheur : MonoBehaviour
     public void setMouv(){
         isMovingVertical = true;
         rb.gravityScale = 0;
-        //col.enabled = false;
         mouvIsFinish = false;
     }
 
@@ -47,6 +45,7 @@ public class ScriptMoveOnPecheur : MonoBehaviour
             isMovingVertical = false;
             isMovingHorizontal = true;
             isTop = true;
+            Physics2D.IgnoreCollision(sol, GetComponent<Collider2D>(),false);
         }
     
     }
@@ -62,25 +61,24 @@ public class ScriptMoveOnPecheur : MonoBehaviour
         {
             // Arrête le déplacement horizontal une fois à la hauteur de la cible
             isMovingHorizontal = false;
-            col.enabled = true;
             rb.gravityScale = 1;
         }
     }
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Sol"))
-        {
-            if (numbTouchGroun == 0){
-                Debug.Log("First tuch");
-                Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
-                numbTouchGroun +=1;
-            }else{
-                mouvIsFinish = true;
-                Debug.Log("double tuch");
-                Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(),false);
-
-                numbTouchGroun = 0;
+        // Traverse tout les objets avec le tag
+        if (collision.gameObject.layer == LayerMask.NameToLayer("HamconTraverse")){
+            Debug.Log("Layer travers");
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            
+            // Stock le sol au premier contact
+            if (collision.gameObject.CompareTag("Sol")){
+                if(isMovingVertical){
+                    sol = collision.collider;
+                }else{
+                    mouvIsFinish = true;
+                }
             }
         }
     }

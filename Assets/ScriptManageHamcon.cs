@@ -6,12 +6,14 @@ public class ScriptManageHamcon : MonoBehaviour
 {
     private ScriptFixePositionOnFish scriptMouvOnFish;
     private ScriptMoveOnPecheur scriptMoveOnPecheur;
+    private ScriptDead scriptDead;
     private bool appelMov = false;
 
     void Start()
     {
         scriptMouvOnFish = GetComponent<ScriptFixePositionOnFish>();
         scriptMoveOnPecheur = GetComponent<ScriptMoveOnPecheur>();
+        scriptDead = GetComponent<ScriptDead>();
 
         if (scriptMouvOnFish == null || scriptMoveOnPecheur == null)
         {

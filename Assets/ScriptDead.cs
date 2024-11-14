@@ -5,8 +5,7 @@ using UnityEngine;
 public class ScriptDead : MonoBehaviour
 {
 
-    public GameObject canvaDead = null;
-
+    public ScriptCanvaDead canvaDead = null;
     void Start()
     {
         
@@ -22,8 +21,7 @@ public class ScriptDead : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Pecheur") && canvaDead != null)
         {
-            Debug.Log("Appel du canva:");
-            canvaDead.SetActive(true);        
+            canvaDead.canvaSetDead(gameObject);        
         }
     }
 }
