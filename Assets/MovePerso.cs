@@ -5,17 +5,19 @@ using UnityEngine;
 public class MovePerso : MonoBehaviour
 {
     public float speed = 5f; // Vitesse de déplacement
-    public float jumpForce = 2f; // Force de saut
+    public float jumpForce = 1f; // Force de saut
 
     private Rigidbody2D rb;
     private bool isGrounded = false;
-    private SpriteRenderer spriteRenderer = null;
+
+    private bool isPressingS = false;
+
+    private Collider2D platTuch = null;
 
     void Start()
     {
         // Récupère le composant Rigidbody2D attaché à ce GameObject
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -23,26 +25,46 @@ public class MovePerso : MonoBehaviour
         // Déplacement horizontal
         float horizontal = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if (horizontal < 0){
-            spriteRenderer.flipX = true;
-        }else{
-            spriteRenderer.flipX = false;
-        }
+
         // Saut
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
             isGrounded = false; // Empêche de sauter à nouveau en l'air
         }
+
+        isPressingS = Input.GetKey(KeyCode.S);
     }
 
     // Détection du contact avec le sol pour réinitialiser "isGrounded"
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         // Si le joueur touche un objet étiqueté comme "Sol" (ou ground en anglais)
-        if (collision.gameObject.CompareTag("Sol"))
+        if (collision.gameObject.CompareTag("Sol") || collision.gameObject.CompareTag("PlatformeTraverssable"))
         {
             isGrounded = true;
+            if(platTuch!=null){
+                Debug.Log("Plateforme: "+platTuch);
+            }
         }
+        
+        if (platTuch!=null){
+            Debug.Log("retabli");
+            Physics2D.IgnoreCollision(platTuch, GetComponent<Collider2D>(),false);
+            Debug.Log("Plateforme: "+platTuch);
+            platTuch = null;
+        }
+        
+        // Si le joueur touche un objet étiqueté comme "PlatformeTraverssable" et appuie vers le bas
+        if (collision.gameObject.CompareTag("PlatformeTraverssable") && isPressingS)
+        {
+            Debug.Log("au traver");
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            platTuch = collision.collider;
+            Debug.Log("Plateforme: "+platTuch);
+        }
+
+        
     }
+
 }

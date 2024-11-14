@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sol
   - Pecheur
+  - PlatformeTraverssable
   layers:
   - Default
   - TransparentFX
