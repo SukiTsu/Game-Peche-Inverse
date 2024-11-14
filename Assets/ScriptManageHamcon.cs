@@ -8,6 +8,7 @@ public class ScriptManageHamcon : MonoBehaviour
     private ScriptMoveOnPecheur scriptMoveOnPecheur;
     private ScriptDead scriptDead;
     private bool appelMov = false;
+    public float interval = 7f; 
 
     void Start()
     {
@@ -21,6 +22,8 @@ public class ScriptManageHamcon : MonoBehaviour
         }
 
         scriptMoveOnPecheur.isMovingVertical = false;
+        InvokeRepeating("GoTrack", 3f, interval);
+
     }
 
     void Update()
@@ -31,21 +34,19 @@ public class ScriptManageHamcon : MonoBehaviour
             scriptMouvOnFish.SetOnFish(true);
         }
 
-        // Vérifie si la touche E est pressée une seule fois pour démarrer le mouvement
-        if (Input.GetKeyDown(KeyCode.E) && !appelMov)
-        {
-            Debug.Log("Clique détecté");
-
-            // Lance le mouvement et désactive la fixation
-            scriptMouvOnFish.SetOnFish(false);
-            appelMov = true;  // Marque que le mouvement a été déclenché
-            scriptMoveOnPecheur.setMouv();  // Lance le mouvement vertical
-        }
-
-        // Réinitialise `appelMov` lorsque le mouvement est terminé
+        // Réinitialise appelMov lorsque le mouvement est terminé
         if (scriptMoveOnPecheur.mouvIsFinish && appelMov)
         {
             appelMov = false;
+        }
+    }
+    void GoTrack(){
+        if (!appelMov)
+        {
+            interval = Random.Range(1.0f, 7.0f);
+            scriptMouvOnFish.SetOnFish(false);
+            appelMov = true; 
+            scriptMoveOnPecheur.setMouv();  // Lance le mouvement vertical
         }
     }
 }

@@ -11,7 +11,7 @@ public class MovePerso : MonoBehaviour
     private bool isGrounded = false;
     private SpriteRenderer spriteRenderer = null;
     public bool isDead = false;
-
+    private ScriptTrophee scriptTrophee;
     void Start()
     {
         // Récupère le composant Rigidbody2D attaché à ce GameObject

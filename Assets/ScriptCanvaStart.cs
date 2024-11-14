@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class ScriptCanvaStart : MonoBehaviour
 {
-    
-public GameObject joueur;
-public GameObject bot;
+    public GameManager gameManager;
 
     void Start()
     {
-        joueur.SetActive(false);
-        bot.SetActive(false);
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -22,7 +18,6 @@ public GameObject bot;
 
     public void StartGame(){
         gameObject.SetActive(false);
-        joueur.SetActive(true);
-        bot.SetActive(true);
+        gameManager.StartGame();
     }
 }
