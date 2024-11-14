@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScriptMouvementPoisson : MonoBehaviour
 {
-    public Transform target; 
+    public Transform targetFish; 
     public float speed = 2f;
     private Vector3 originalScale;
 
@@ -14,11 +14,14 @@ public class ScriptMouvementPoisson : MonoBehaviour
 
     void Update()
     {
-    if (target != null)
-    {
+        onMouv();
+    }
+    void onMouv(){
+        if (targetFish != null)
+        {
         Vector3 currentPosition = transform.position;
         
-        float newXPosition = Mathf.MoveTowards(currentPosition.x, target.position.x, speed * Time.deltaTime);
+        float newXPosition = Mathf.MoveTowards(currentPosition.x, targetFish.position.x, speed * Time.deltaTime);
         
         transform.position = new Vector3(newXPosition, currentPosition.y, currentPosition.z);
     

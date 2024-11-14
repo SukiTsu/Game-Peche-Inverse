@@ -1165,8 +1165,8 @@ GameObject:
   - component: {fileID: 986084127}
   - component: {fileID: 986084126}
   m_Layer: 0
-  m_Name: Square
-  m_TagString: Untagged
+  m_Name: water
+  m_TagString: water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c9fce672ffc104e9900058fdcec3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1713879163}
+  targetFish: {fileID: 1713879163}
   speed: 5
 --- !u!1 &1235785878
 GameObject:
@@ -1749,10 +1749,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1577768050}
   - component: {fileID: 1577768049}
-  - component: {fileID: 1577768048}
   - component: {fileID: 1577768047}
   - component: {fileID: 1577768051}
   - component: {fileID: 1577768052}
+  - component: {fileID: 1577768053}
+  - component: {fileID: 1577768054}
   m_Layer: 0
   m_Name: amson
   m_TagString: Untagged
@@ -1795,24 +1796,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1577768048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577768046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27f62fbc2b7c1d4997b2f2f978aebc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1713879163}
-  verticalDistance: 1
-  verticalSpeed: 5
-  horizontalSpeed: 5
-  actionKey: 101
-  canvaDead: {fileID: 1962483236}
 --- !u!212 &1577768049
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1916,11 +1899,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 1577768046}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27f62fbc2b7c1d4997b2f2f978aebc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1713879163}
+  verticalSpeed: 5
+  horizontalSpeed: 6
+  hauteur: 2
+  mouvIsFinish: 1
+  isMovingVertical: 1
+  isMovingHorizontal: 0
+--- !u!114 &1577768053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577768046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1e42e7814ada3447963adc8300311cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1200957989}
   offset: {x: 0, y: 0}
+  goInFish: 0
+--- !u!114 &1577768054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577768046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092654d16ca770f4e827b26f774c9150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1593732481
 GameObject:
   m_ObjectHideFlags: 0

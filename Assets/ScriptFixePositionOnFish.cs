@@ -7,7 +7,7 @@ public class ScriptFixePositionOnFish : MonoBehaviour
     
     public Transform target; // Référence à l'objet cible
     public Vector2 offset; // Décalage pour ajuster la position exacte si besoin
-
+    public bool goInFish = false;
     void Start()
     {
         
@@ -15,9 +15,8 @@ public class ScriptFixePositionOnFish : MonoBehaviour
 
     void Update()
     {
-        if (target != null)
+        if (target != null && goInFish)
         {
-            // Récupère la taille de l'objet cible
             RectTransform targetRect = target.GetComponent<RectTransform>();
 
             if (targetRect != null)
@@ -30,8 +29,11 @@ public class ScriptFixePositionOnFish : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("L'objet cible n'a pas de RectTransform. Vérifiez que c'est un élément UI.");
+                Debug.LogWarning("L'objet cible n'a pas de RectTransform.");
             }
         }
+    }
+    public void SetOnFish(bool newValue){
+        goInFish = newValue;
     }
 }
