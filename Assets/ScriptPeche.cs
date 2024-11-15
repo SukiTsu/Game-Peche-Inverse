@@ -7,7 +7,6 @@ public class ScriptMoveOnPecheur : MonoBehaviour
     public float horizontalSpeed = 6f;
     public float hauteur = 2f;
     public bool mouvIsFinish = true;
-    private Collider2D sol = null;
     private bool isTop = false;
     public bool isMovingVertical = false;
     public bool isMovingHorizontal = false;
@@ -27,7 +26,8 @@ public class ScriptMoveOnPecheur : MonoBehaviour
     }
     public void setMouv(){
         isMovingVertical = true;
-        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Kinematic;
         mouvIsFinish = false;
     }
 
@@ -45,7 +45,7 @@ public class ScriptMoveOnPecheur : MonoBehaviour
             isMovingVertical = false;
             isMovingHorizontal = true;
             isTop = true;
-            Physics2D.IgnoreCollision(sol, GetComponent<Collider2D>(),false);
+            
         }
     
     }
@@ -61,7 +61,7 @@ public class ScriptMoveOnPecheur : MonoBehaviour
         {
             // Arrête le déplacement horizontal une fois à la hauteur de la cible
             isMovingHorizontal = false;
-            rb.gravityScale = 1;
+            rb.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 
@@ -69,17 +69,12 @@ public class ScriptMoveOnPecheur : MonoBehaviour
     {
         // Traverse tout les objets avec le tag
         if (collision.gameObject.layer == LayerMask.NameToLayer("HamconTraverse")){
-            Debug.Log("Layer travers");
+            //Debug.Log("Layer travers");
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
             
-            // Stock le sol au premier contact
-            if (collision.gameObject.CompareTag("Sol")){
-                if(isMovingVertical){
-                    sol = collision.collider;
-                }else{
-                    mouvIsFinish = true;
-                }
-            }
         }
+        if (collision.gameObject.CompareTag("Sol")){                
+                mouvIsFinish = true;
+            }
     }
 }

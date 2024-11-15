@@ -7,8 +7,8 @@ public class ScriptManageHamcon : MonoBehaviour
     private ScriptFixePositionOnFish scriptMouvOnFish;
     private ScriptMoveOnPecheur scriptMoveOnPecheur;
     private ScriptDead scriptDead;
-    private bool appelMov = false;
-    public float interval = 7f; 
+    public bool appelMov = false;
+    public float interval = 4f; 
 
     void Start()
     {

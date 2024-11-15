@@ -6,13 +6,10 @@ using UnityEngine.UI;
 
 public class ScriptCanvaDead : MonoBehaviour
 {
-    public MovePerso pecheur = null;
+    public GameManager gameManagers;
     public Image killerImage;   
-    private bool isActive = false;      
-
     void Start()
     {
-        gameObject.SetActive(false);
     }
 
     void Update()
@@ -21,8 +18,8 @@ public class ScriptCanvaDead : MonoBehaviour
     }
 
     public void canvaSetDead(GameObject killerObject){
-        if (isActive) return;
-        isActive = true;
+        
+        Debug.Log("Affiche canva");
         SpriteRenderer killerSpriteRenderer = killerObject.GetComponent<SpriteRenderer>();
 
         if (killerSpriteRenderer != null && killerImage != null)
@@ -31,17 +28,9 @@ public class ScriptCanvaDead : MonoBehaviour
             killerImage.sprite = killerSpriteRenderer.sprite;
         }
         
-        if (pecheur!=null){
-            pecheur.setDead(true);
-        }
         gameObject.SetActive(true);
+        gameManagers.Pose();
+        
     }
 
-    public void restart(){
-        if (pecheur!=null){
-            isActive = false;
-            pecheur.setDead(false);
-            gameObject.SetActive(false);
-        }
-    }
 }

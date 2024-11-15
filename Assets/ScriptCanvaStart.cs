@@ -15,9 +15,4 @@ public class ScriptCanvaStart : MonoBehaviour
     {
         
     }
-
-    public void StartGame(){
-        gameObject.SetActive(false);
-        gameManager.StartGame();
-    }
 }

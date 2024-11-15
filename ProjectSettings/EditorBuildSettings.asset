@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Niv2.unity
     guid: 3263eb642deb5cf40929507ec36ed5eb
+  - enabled: 1
+    path: Assets/Scenes/Lord.unity
+    guid: 20c466c62f66de84c98b247b7d2af4ff
   m_configObjects: {}
